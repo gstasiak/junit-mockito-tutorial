@@ -7,6 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertNotNull;
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@RunWith(MockitoJUnitRunner.class)
 //@RunWith(PowerMockRunner.class)
+@RunWith(ExtendedJUnitTestRunner.class)
 public class UserServiceTest {
 
     private UserService userService = new UserService();
@@ -75,10 +77,12 @@ public class UserServiceTest {
     public void test1() {
         //FIXME: czy zwróci interwał taki jak oczekujemy?
     }
+
     @Test
     public void test2() {
         //FIXME: czy rzuci wyjątkiem jak daty są w odrotnej kolejności (IllegalArgumentException)
     }
+
     @Test
     public void test3() {
         //FIXME: a co jeśli daty są nullowe?
