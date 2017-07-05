@@ -64,7 +64,7 @@ public class UserServiceTest {
         //assertNotSame
     }
 
-    //1) czemu to jest problematyczne?
+    //czemu to jest problematyczne?
     @Test(expected = FirstNameCannotBeNullException.class)
     public void generatingLoginWithNullFirstNameCannotBeNull() {
         //given
@@ -92,24 +92,6 @@ public class UserServiceTest {
             fail();
         } catch (NullPointerException ex) {
         }
-    }
-
-    //2) Testy do napisania
-    //com.comarch.jm.user.UserService.getActivityInterval()
-    //Zmienić nazwy!
-    @Test
-    public void test1() {
-        //FIXME: czy zwróci interwał taki jak oczekujemy?
-    }
-
-    @Test
-    public void test2() {
-        //FIXME: czy rzuci wyjątkiem jak daty są w odrotnej kolejności (IllegalArgumentException)
-    }
-
-    @Test
-    public void test3() {
-        //FIXME: a co jeśli daty są nullowe?
     }
 
     @Test(timeout = 1000)
@@ -142,6 +124,24 @@ public class UserServiceTest {
         //Assume.assumeTrue(System.getProperty("os.name").contains("Linux"));
         //...
         fail();
+    }
+
+    //TODO: Testy do napisania
+    //com.comarch.jm.user.UserService.getActivityInterval()
+    //Zmienić nazwy!
+    @Test
+    public void test1() {
+        //FIXME: czy zwróci interwał taki jak oczekujemy?
+    }
+
+    @Test
+    public void test2() {
+        //FIXME: czy rzuci wyjątkiem jak daty są w odwrotnej kolejności (IllegalArgumentException)
+    }
+
+    @Test
+    public void test3() {
+        //FIXME: a co jeśli daty są nullowe?
     }
 
 }

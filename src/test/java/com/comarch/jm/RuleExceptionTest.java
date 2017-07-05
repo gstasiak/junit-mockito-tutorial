@@ -6,6 +6,7 @@ import org.junit.rules.ExpectedException;
 
 public class RuleExceptionTest {
 
+    //Customowe Reguły - implements TestRule
     @Rule
     public ExpectedException exception = ExpectedException.none();
 

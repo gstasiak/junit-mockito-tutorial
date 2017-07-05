@@ -8,7 +8,7 @@ public class UserService {
 
     public String generateLogin(User user) {
         if (user.getFirstName() == null) {
-            throw new FirstNameCannotBeNullException();
+            throw new FirstNameCannotBeNullException("ups");
         }
         return user.getLastName().toUpperCase() + "-" + user.getFirstName().toUpperCase();
     }
