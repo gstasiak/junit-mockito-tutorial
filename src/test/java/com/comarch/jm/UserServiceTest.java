@@ -126,6 +126,7 @@ public class UserServiceTest {
         fail();
     }
 
+    //Cwiczenie 1
     //TODO: Testy do napisania
     //com.comarch.jm.user.UserService.getActivityInterval()
     //Zmienić nazwy!

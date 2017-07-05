@@ -3,12 +3,17 @@ package com.comarch.jm;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.comarch.jm.user.FirstNameCannotBeNullException;
 import com.comarch.jm.user.User;
 import com.comarch.jm.user.UserService;
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
+import static org.hamcrest.core.AnyOf.anyOf;
+import static org.hamcrest.core.Is.is;
 
 public class UserServiceASJTest {
 
@@ -25,8 +30,14 @@ public class UserServiceASJTest {
         String loginForUser = userService.generateLogin(user);
 
         //then
-        assertThat(loginForUser).isNotNull();
-        assertThat(loginForUser).isEqualTo("LAST-FIRST");
+        assertThat(loginForUser, is(notNullValue()));
+
+        //to to samo
+        assertThat(loginForUser, equalTo("LAST-FIRST"));
+        assertThat(loginForUser, is(equalTo("LAST-FIRST")));
+        assertThat(loginForUser, is("LAST-FIRST"));
+
+        assertThat(loginForUser, anyOf(is(nullValue()), is("LAST-FIRST")));
     }
 
     @Test
@@ -45,61 +56,22 @@ public class UserServiceASJTest {
         logins.add(userService.generateLogin(user2));
 
         //then
-        assertThat(logins).isNotNull();
-        assertThat(logins).hasSize(2);
-        assertThat(logins).doesNotContain("LAST-FIRST");
+        assertThat(logins, is(notNullValue()));
+        assertThat(logins, hasSize(2));
+        assertThat(logins, not(contains("LAST-FIRST")));
 
-        assertThat(Boolean.TRUE).isTrue();
+        assertThat(Boolean.TRUE, is(true));
 
-        assertThat(logins).extracting(String::length).contains(12);
-        //assertThat(object).extracting("someField").contains(someValues);
+        assertThat(logins.get(0), startsWith("L"));
 
-        assertThat(logins).filteredOn(login -> login.contains("2")).containsOnly("LAST2-FIRST2");
+        assertThat(logins, contains("LAST2-FIRST2", "LAST1-FIRST1"));
+        assertThat(logins, containsInAnyOrder("LAST1-FIRST1", "LAST2-FIRST2"));
+
+        //assertThat(value, everyItem(hasProperty("param", is(not((someValue))))));
     }
 
-    @Test
-    public void generatedLoginIsCorrect() {
-        //given
-        User user3 = new User();
-        user3.setFirstName("first3");
-        user3.setLastName("last3");
-
-        //when
-        String login = userService.generateLogin(user3);
-
-        //then
-        //chain!
-        assertThat(login).startsWith("LAS").endsWith("3").isEqualToIgnoringCase("LAST3-FIRST3");
-    }
-
-    @Test
-    public void generatingLoginWithNullFirstNameCannotBeNull() {
-        //given
-        User user = new User();
-        user.setFirstName(null);
-        user.setLastName("last");
-
-        //when
-        //then
-        assertThatThrownBy(() -> userService.generateLogin(user)).isExactlyInstanceOf(FirstNameCannotBeNullException.class);
-    }
-
-    @Test
-    public void generatingLoginWithNullFirstNameReallyCannotBeNull() {
-        //given
-        User user = new User();
-        user.setFirstName(null);
-        user.setLastName("last");
-
-        //when
-        Throwable throwable = catchThrowable(() -> userService.generateLogin(user));
-
-        //then
-        assertThat(throwable).isExactlyInstanceOf(FirstNameCannotBeNullException.class);
-        assertThat(throwable).hasMessageContaining("ups");
-    }
-
-    //TODO: Testy do napisania - to samo co poprzednio tylko z użyciem assertj
+    //Cwiczenie 2
+    //TODO: Testy do napisania - to samo co poprzednio tylko z użyciem hamcresta
     //com.comarch.jm.user.UserService.getActivityInterval()
     //Zmienić nazwy!
     @Test
