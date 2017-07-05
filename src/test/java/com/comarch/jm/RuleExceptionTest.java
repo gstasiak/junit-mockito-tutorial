@@ -10,7 +10,7 @@ public class RuleExceptionTest {
     public ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void throwsIllegalArgumentExceptionIfIconIsNull() {
+    public void throwsNullPointerExceptionIfValueIsNull() {
         exception.expect(NullPointerException.class);
         //exception.expectMessage("null!");
 
