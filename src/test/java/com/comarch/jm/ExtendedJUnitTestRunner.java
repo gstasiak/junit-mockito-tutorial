@@ -6,8 +6,8 @@ import org.junit.runners.model.InitializationError;
 
 public class ExtendedJUnitTestRunner extends BlockJUnit4ClassRunner {
 
-    public ExtendedJUnitTestRunner(Class<?> klass) throws InitializationError {
-        super(klass);
+    public ExtendedJUnitTestRunner(Class<?> clazz) throws InitializationError {
+        super(clazz);
     }
 
     @Override

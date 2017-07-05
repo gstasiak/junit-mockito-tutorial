@@ -9,8 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 //@RunWith(JUnitParamsRunner.class)
 //@RunWith(SpringJUnit4ClassRunner.class)
@@ -26,14 +25,14 @@ public class UserServiceTest {
         System.out.println("initBeforeClass");
     }
 
-    @Before
-    public void initBefore() {
-        System.out.println("initBefore");
-    }
-
     @AfterClass
     public static void cleanAfterClass() {
         System.out.println("cleanAfterClass");
+    }
+
+    @Before
+    public void initBefore() {
+        System.out.println("initBefore");
     }
 
     @Before
@@ -54,6 +53,15 @@ public class UserServiceTest {
         //then
         assertNotNull(loginForUser);
         assertEquals("LAST-FIRST", loginForUser);
+
+        //assertTrue
+        //assertFalse
+
+        //assertNull
+
+        //Referencje!
+        //assertSame
+        //assertNotSame
     }
 
     //1) czemu to jest problematyczne?
@@ -68,6 +76,22 @@ public class UserServiceTest {
         userService.generateLogin(user);
 
         //then
+    }
+
+    @Test
+    public void generatingLoginWithNullLastNameCannotBeNull() {
+        //given
+        User user = new User();
+        user.setFirstName("first");
+        user.setLastName(null);
+
+        //when
+        try {
+            userService.generateLogin(user);
+            //then
+            fail();
+        } catch (NullPointerException ex) {
+        }
     }
 
     //2) Testy do napisania
@@ -88,6 +112,15 @@ public class UserServiceTest {
         //FIXME: a co jeśli daty są nullowe?
     }
 
+    @Test(timeout = 1000)
+    public void testCannotTakesLongerThanOneSecond() {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     //@Ignore
     @Test
     public void generatingLoginIgnoresWhitespaces() {
@@ -102,6 +135,13 @@ public class UserServiceTest {
         //then
         assertNotNull(loginForUser);
         assertEquals("LAST-FIRSTNAME", loginForUser);
+    }
+
+    @Test
+    public void testSomeFunctionalityOnlyOnLinux() {
+        //Assume.assumeTrue(System.getProperty("os.name").contains("Linux"));
+        //...
+        fail();
     }
 
 }
